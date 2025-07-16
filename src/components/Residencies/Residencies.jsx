@@ -1,10 +1,11 @@
-import React from 'react'
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import "swiper/css"
-import "./Residencies.css"
-import data from '../../utils/slider.json'
+import React from 'react';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import "swiper/css";
+import "./Residencies.css";
+import data from '../../utils/slider.json';
+import { sliderSettings } from '../../utils/common';
 
-const residencies = () => {
+const Residencies = () => {
   return (
     <section className="r-wrapper">
       <div className="paddings innerWidth r-container">
@@ -13,7 +14,7 @@ const residencies = () => {
           <span className='primaryText'>Popular Residencies</span>
         </div>
 
-        <Swiper>
+        <Swiper {...sliderSettings}>
           {
             data.map((card, i)=>(
               <SwiperSlide key={i}>
@@ -30,10 +31,23 @@ const residencies = () => {
               </SwiperSlide>
             ))
           }
+
+          <SliderButtons/>
         </Swiper>
+
       </div>
     </section>
   );
 };
 
-export default residencies
+export default Residencies;
+
+const SliderButtons = () => {
+  const swiper = useSwiper();
+  return (
+    <div className='r-button'>
+      <button onClick={()=> swiper.slidePrev()}>&lt;</button>
+      <button onClick={()=> swiper.slideNext()}>&gt;</button>
+    </div>
+  );
+};
